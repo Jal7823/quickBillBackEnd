@@ -1,0 +1,147 @@
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
+from rest_framework import viewsets,status
+
+from ..models import Brand,Category,Products,Provider
+from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,SerializerProvider
+
+@extend_schema_view(
+    list=extend_schema(
+        tags=['Products'],
+        description='Should get all products'
+    ),
+    create=extend_schema(
+        tags=['Products'],
+        description='Create a new instance of Products',
+        request=SerializerProducts,
+    ),
+    retrieve=extend_schema(
+        tags=['Products'],
+        description='Retrieve a specific instance of MyModel by ID',
+        responses={200: SerializerProducts},
+    ),
+    update=extend_schema(
+        tags=['Products'],
+        description='Update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    partial_update=extend_schema(
+        tags=['Products'],
+        description='Partial update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    destroy=extend_schema(
+        tags=['Products'],
+        description='Delete a specific instance of MyModel by ID',
+    ),
+)
+class ViewProducts(viewsets.ModelViewSet):
+    queryset = Products.objects.all()
+    serializer_class = SerializerProducts    
+
+
+@extend_schema_view(
+    list=extend_schema(
+        tags=['Category'],
+        description='Should get all products'
+    ),
+    create=extend_schema(
+        tags=['Category'],
+        description='Create a new instance of Products',
+        request=SerializerProducts,
+    ),
+    retrieve=extend_schema(
+        tags=['Category'],
+        description='Retrieve a specific instance of MyModel by ID',
+        responses={200: SerializerProducts},
+    ),
+    update=extend_schema(
+        tags=['Category'],
+        description='Update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    partial_update=extend_schema(
+        tags=['Category'],
+        description='Partial update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    destroy=extend_schema(
+        tags=['Category'],
+        description='Delete a specific instance of MyModel by ID',
+    ),
+)
+class ViewCategory(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = SerializerCategory 
+
+
+@extend_schema_view(
+    list=extend_schema(
+        tags=['Brand'],
+        description='Should get all products'
+    ),
+    create=extend_schema(
+        tags=['Brand'],
+        description='Create a new instance of Products',
+        request=SerializerProducts,
+    ),
+    retrieve=extend_schema(
+        tags=['Brand'],
+        description='Retrieve a specific instance of MyModel by ID',
+        responses={200: SerializerProducts},
+    ),
+    update=extend_schema(
+        tags=['Brand'],
+        description='Update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    partial_update=extend_schema(
+        tags=['Brand'],
+        description='Partial update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    destroy=extend_schema(
+        tags=['Brand'],
+        description='Delete a specific instance of MyModel by ID',
+    ),
+)
+
+class ViewBrand(viewsets.ModelViewSet):
+    queryset = Brand.objects.all()
+    serializer_class = SerializerBrand 
+
+
+@extend_schema_view(
+    list=extend_schema(
+        tags=['Provider'],
+        description='Should get all products'
+    ),
+    create=extend_schema(
+        tags=['Provider'],
+        description='Create a new instance of Products',
+        request=SerializerProducts,
+    ),
+    retrieve=extend_schema(
+        tags=['Provider'],
+        description='Retrieve a specific instance of MyModel by ID',
+        responses={200: SerializerProducts},
+    ),
+    update=extend_schema(
+        tags=['Provider'],
+        description='Update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    partial_update=extend_schema(
+        tags=['Provider'],
+        description='Partial update a specific instance of MyModel by ID',
+        request=SerializerProducts,
+    ),
+    destroy=extend_schema(
+        tags=['Provider'],
+        description='Delete a specific instance of MyModel by ID',
+    ),
+)
+
+class ViewProvider(viewsets.ModelViewSet):
+    queryset = Provider.objects.all()
+    serializer_class = SerializerProvider 

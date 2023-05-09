@@ -26,7 +26,7 @@ class UserManager(BaseUserManager):
         user.save()
         return 
 
-class Users(models.Model):
+class Users(AbstractUser):
     #data base
     username = models.CharField('Username', max_length=50,unique=True)
     name = models.CharField('Name', max_length=100,unique=True)
@@ -34,13 +34,13 @@ class Users(models.Model):
     image = models.ImageField('Image', upload_to='avatar',null=True,blank=True,default='avatar/default.jpg')
     #permisions
     is_staff = models.BooleanField(default=False)
-    is_employe = models.BigAutoField(default=False)
+    is_employe = models.BooleanField(default=False)
     is_boss = models.BooleanField(default=False)
     #data
     address = models.CharField('Address', max_length=250)
     location = models.CharField('Locatin', max_length=250)
     province = models.CharField('Provincia', max_length=100)
-    phone = models.PhoneNumberField('Phone')
+    phone = models.IntegerField('Phone',null=True,blank=True)
 
     def __str__(self):
         return self.name
@@ -52,4 +52,4 @@ class Users(models.Model):
         return True
     
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELD = ['email','name']
+    REQUIRED_FIELDS = ['email','name']

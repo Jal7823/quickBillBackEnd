@@ -38,7 +38,9 @@ INSTALLED_THRIDS = [
     'drf_spectacular',
 ]
 INSTALLED_LOCAL = [
-    
+    'core.products',
+    'core.sales',
+    'core.users',
 ]
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
@@ -125,6 +127,8 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+#user model
+AUTH_USER_MODEL = 'users.Users'
 
 #API
 REST_FRAMEWORK = {
