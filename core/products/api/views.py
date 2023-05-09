@@ -18,7 +18,11 @@ from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,S
     retrieve=extend_schema(
         tags=['Products'],
         description='Retrieve a specific instance of MyModel by ID',
-        responses={200: SerializerProducts},
+        responses={
+            200: SerializerProducts,
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     update=extend_schema(
         tags=['Products'],
@@ -43,31 +47,35 @@ class ViewProducts(viewsets.ModelViewSet):
 @extend_schema_view(
     list=extend_schema(
         tags=['Category'],
-        description='Should get all products'
+        description='Should get all Category'
     ),
     create=extend_schema(
         tags=['Category'],
-        description='Create a new instance of Products',
+        description='Create a new instance of Category',
         request=SerializerProducts,
     ),
     retrieve=extend_schema(
         tags=['Category'],
-        description='Retrieve a specific instance of MyModel by ID',
-        responses={200: SerializerProducts},
+        description='Retrieve a specific instance of Category',
+        responses={
+            200: SerializerCategory,
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     update=extend_schema(
         tags=['Category'],
-        description='Update a specific instance of MyModel by ID',
+        description='Update a specific instance of Category',
         request=SerializerProducts,
     ),
     partial_update=extend_schema(
         tags=['Category'],
-        description='Partial update a specific instance of MyModel by ID',
+        description='Partial update a specific instance of Category',
         request=SerializerProducts,
     ),
     destroy=extend_schema(
         tags=['Category'],
-        description='Delete a specific instance of MyModel by ID',
+        description='Delete a specific instance of Category',
     ),
 )
 class ViewCategory(viewsets.ModelViewSet):
@@ -78,31 +86,35 @@ class ViewCategory(viewsets.ModelViewSet):
 @extend_schema_view(
     list=extend_schema(
         tags=['Brand'],
-        description='Should get all products'
+        description='Should get all Brand'
     ),
     create=extend_schema(
         tags=['Brand'],
-        description='Create a new instance of Products',
-        request=SerializerProducts,
+        description='Create a new instance of Brand',
+        request=SerializerBrand,
     ),
     retrieve=extend_schema(
         tags=['Brand'],
-        description='Retrieve a specific instance of MyModel by ID',
-        responses={200: SerializerProducts},
+        description='Retrieve a specific instance of Brand',
+        responses={
+            200: SerializerBrand,
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     update=extend_schema(
         tags=['Brand'],
-        description='Update a specific instance of MyModel by ID',
-        request=SerializerProducts,
+        description='Update a specific instance of Brand',
+        request=SerializerBrand,
     ),
     partial_update=extend_schema(
         tags=['Brand'],
-        description='Partial update a specific instance of MyModel by ID',
-        request=SerializerProducts,
+        description='Partial update a specific instance of Brand',
+        request=SerializerBrand,
     ),
     destroy=extend_schema(
         tags=['Brand'],
-        description='Delete a specific instance of MyModel by ID',
+        description='Delete a specific instance of Brand',
     ),
 )
 
@@ -114,31 +126,35 @@ class ViewBrand(viewsets.ModelViewSet):
 @extend_schema_view(
     list=extend_schema(
         tags=['Provider'],
-        description='Should get all products'
+        description='Should get all Provider'
     ),
     create=extend_schema(
         tags=['Provider'],
-        description='Create a new instance of Products',
-        request=SerializerProducts,
+        description='Create a new instance of Provider',
+        request=SerializerProvider,
     ),
     retrieve=extend_schema(
         tags=['Provider'],
-        description='Retrieve a specific instance of MyModel by ID',
-        responses={200: SerializerProducts},
+        description='Retrieve a specific instance of Provider',
+        responses={
+            200: SerializerProvider,
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     update=extend_schema(
         tags=['Provider'],
-        description='Update a specific instance of MyModel by ID',
-        request=SerializerProducts,
+        description='Update a specific instance of Provider',
+        request=SerializerProvider,
     ),
     partial_update=extend_schema(
         tags=['Provider'],
-        description='Partial update a specific instance of MyModel by ID',
-        request=SerializerProducts,
+        description='Partial update a specific instance of Provider',
+        request=SerializerProvider,
     ),
     destroy=extend_schema(
         tags=['Provider'],
-        description='Delete a specific instance of MyModel by ID',
+        description='Delete a specific instance of Provider',
     ),
 )
 
