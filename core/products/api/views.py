@@ -14,6 +14,11 @@ from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,S
         tags=['Products'],
         description='Create a new instance of Products',
         request=SerializerProducts,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     retrieve=extend_schema(
         tags=['Products'],
@@ -28,11 +33,21 @@ from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,S
         tags=['Products'],
         description='Update a specific instance of MyModel by ID',
         request=SerializerProducts,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     partial_update=extend_schema(
         tags=['Products'],
         description='Partial update a specific instance of MyModel by ID',
         request=SerializerProducts,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     destroy=extend_schema(
         tags=['Products'],
@@ -53,6 +68,11 @@ class ViewProducts(viewsets.ModelViewSet):
         tags=['Category'],
         description='Create a new instance of Category',
         request=SerializerProducts,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     retrieve=extend_schema(
         tags=['Category'],
@@ -67,11 +87,21 @@ class ViewProducts(viewsets.ModelViewSet):
         tags=['Category'],
         description='Update a specific instance of Category',
         request=SerializerProducts,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     partial_update=extend_schema(
         tags=['Category'],
         description='Partial update a specific instance of Category',
         request=SerializerProducts,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     destroy=extend_schema(
         tags=['Category'],
@@ -92,6 +122,11 @@ class ViewCategory(viewsets.ModelViewSet):
         tags=['Brand'],
         description='Create a new instance of Brand',
         request=SerializerBrand,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     retrieve=extend_schema(
         tags=['Brand'],
@@ -106,11 +141,21 @@ class ViewCategory(viewsets.ModelViewSet):
         tags=['Brand'],
         description='Update a specific instance of Brand',
         request=SerializerBrand,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     partial_update=extend_schema(
         tags=['Brand'],
         description='Partial update a specific instance of Brand',
         request=SerializerBrand,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     destroy=extend_schema(
         tags=['Brand'],
@@ -132,6 +177,11 @@ class ViewBrand(viewsets.ModelViewSet):
         tags=['Provider'],
         description='Create a new instance of Provider',
         request=SerializerProvider,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     retrieve=extend_schema(
         tags=['Provider'],
@@ -146,11 +196,21 @@ class ViewBrand(viewsets.ModelViewSet):
         tags=['Provider'],
         description='Update a specific instance of Provider',
         request=SerializerProvider,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     partial_update=extend_schema(
         tags=['Provider'],
         description='Partial update a specific instance of Provider',
         request=SerializerProvider,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
     ),
     destroy=extend_schema(
         tags=['Provider'],
