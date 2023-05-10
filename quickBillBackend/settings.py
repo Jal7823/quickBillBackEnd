@@ -36,6 +36,7 @@ INSTALLED_BASE = [
 INSTALLED_THRIDS = [
     'rest_framework',
     'drf_spectacular',
+    "corsheaders",
 ]
 INSTALLED_LOCAL = [
     'core.products',
@@ -45,6 +46,7 @@ INSTALLED_LOCAL = [
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -144,3 +146,9 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
 }
+
+
+#cors origin
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173'
+]
