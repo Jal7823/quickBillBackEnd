@@ -16,4 +16,6 @@ urlpatterns = [
     path('products/',include('core.products.api.routers')),
     # path('sales',include('core.sales.api.routers')),
     path('users/',include('core.users.api.routers')),
+    path('orders/',include('core.orders.api.routers')),
+
 ]

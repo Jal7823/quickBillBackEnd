@@ -42,6 +42,7 @@ INSTALLED_LOCAL = [
     'core.products',
     'core.sales',
     'core.users',
+    'core.orders',
 ]
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
@@ -136,6 +137,7 @@ AUTH_USER_MODEL = 'users.Users'
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    
 }
 
 
@@ -144,6 +146,8 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability.',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+    
+    
     # OTHER SETTINGS
 }
 
