@@ -43,6 +43,8 @@ INSTALLED_LOCAL = [
     'core.sales',
     'core.users',
     'core.orders',
+    'core.company',
+    
 ]
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
