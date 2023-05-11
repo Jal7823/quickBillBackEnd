@@ -8,7 +8,6 @@ from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,S
 
 from core.users.permisionsUsers import IsEmploye,is_Boss,is_Staff
 
-
 @extend_schema_view(
     list=extend_schema(
         tags=['Products'],
