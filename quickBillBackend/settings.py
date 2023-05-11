@@ -28,15 +28,14 @@ INSTALLED_BASE = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    #thrids
-    
-
 ]
 
 INSTALLED_THRIDS = [
     'rest_framework',
     'drf_spectacular',
-    "corsheaders",
+    'corsheaders',
+    'rest_framework_simplejwt',
+
 ]
 INSTALLED_LOCAL = [
     'core.products',
@@ -139,6 +138,9 @@ AUTH_USER_MODEL = 'users.Users'
 REST_FRAMEWORK = {
     # YOUR SETTINGS
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',    
+    ),
     
 }
 

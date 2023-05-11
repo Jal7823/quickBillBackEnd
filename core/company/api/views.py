@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from rest_framework import viewsets,status
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
-
+from core.users.permisionsUsers import is_Boss
 
 from ..models import Company
 from .serializers import SerializerCompany

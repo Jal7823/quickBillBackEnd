@@ -1,9 +1,13 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 from rest_framework import viewsets,status
+from rest_framework.permissions import IsAuthenticated
 
 from ..models import Brand,Category,Products,Provider
 from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,SerializerProvider
+
+from core.users.permisionsUsers import IsEmploye,is_Boss,is_Staff
+
 
 @extend_schema_view(
     list=extend_schema(
@@ -57,8 +61,7 @@ from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,S
 class ViewProducts(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = SerializerProducts    
-
-
+    permission_classes = [IsEmploye]
 @extend_schema_view(
     list=extend_schema(
         tags=['Category'],
@@ -111,8 +114,6 @@ class ViewProducts(viewsets.ModelViewSet):
 class ViewCategory(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = SerializerCategory 
-
-
 @extend_schema_view(
     list=extend_schema(
         tags=['Brand'],
@@ -162,11 +163,9 @@ class ViewCategory(viewsets.ModelViewSet):
         description='Delete a specific instance of Brand',
     ),
 )
-
 class ViewBrand(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
     serializer_class = SerializerBrand 
-
 
 @extend_schema_view(
     list=extend_schema(
@@ -217,7 +216,6 @@ class ViewBrand(viewsets.ModelViewSet):
         description='Delete a specific instance of Provider',
     ),
 )
-
 class ViewProvider(viewsets.ModelViewSet):
     queryset = Provider.objects.all()
     serializer_class = SerializerProvider 
