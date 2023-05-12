@@ -1,5 +1,11 @@
+from django.http import request
 
-import requests
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+from drf_spectacular.utils import extend_schema
+
 from django.shortcuts import render,redirect
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,8 +15,21 @@ from django.conf import settings
 from django.contrib import messages
 from django.views.defaults import page_not_found
 
-
-def senOrder(request):
+@extend_schema(
+    request={
+        "type": "object",
+  "properties": {
+    "name": {"type": "string"},
+    "email": {"type": "string"},
+    "order": {"type": "string"},
+    "message": {"type": "string"}
+  },
+  "required": ["name", "email", "order", "message"]
+    },
+    responses={200: 'Email was sent successfully'}
+)
+@api_view(['POST'])
+def send_order(request,name,email,order,message):
     """
     This function sends an email using data submitted via a POST request.
 
@@ -64,6 +83,6 @@ def senOrder(request):
         email.fail_silently = False
         email.send()
 
-        msg = 'Email was send succesfully'
+        msg = 'Email was sent successfully'
 
         return Response(msg,status=status.HTTP_200_OK)

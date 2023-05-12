@@ -10,6 +10,7 @@ from rest_framework_simplejwt.views import (
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
+from .views import send_order
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,6 +31,9 @@ urlpatterns = [
     #token
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    #send email
+    path('sendOrder/',send_order,name='sendOrder')
 
 
 
