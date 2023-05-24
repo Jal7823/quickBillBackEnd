@@ -49,8 +49,9 @@ class Brand(models.Model):
 class Products(models.Model):
     code = models.IntegerField('Internal Code')
     name = models.CharField('Name', max_length=80)
-    provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    description = models.TextField('Description',blank=True,null=True)
+    provider = models.ForeignKey(Provider, on_delete=models.CASCADE,null=True,blank=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE,null=True,blank=True)
     category = models.ManyToManyField(Category)
     price = models.FloatField('Price')
     wPrice = models.IntegerField("wholesaler's price")

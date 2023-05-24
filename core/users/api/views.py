@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from django.contrib.auth import authenticate
 
 from drf_spectacular.utils import extend_schema
@@ -26,7 +27,9 @@ class RegisterView(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
-
+class ViewUsers(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = SerializerUser
 
 
 

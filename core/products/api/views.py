@@ -60,7 +60,7 @@ from core.users.permisionsUsers import IsEmploye,is_Boss,is_Staff
 class ViewProducts(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = SerializerProducts    
-    permission_classes = [IsEmploye]
+    # permission_classes = [IsEmploye]
 @extend_schema_view(
     list=extend_schema(
         tags=['Category'],
