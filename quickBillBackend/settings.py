@@ -1,6 +1,11 @@
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,12 +15,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7bqf4zndoah$s&cpnmhvc=yt*cw39*)qxjr^1jxi1*i)-_9(zi"
+SECRET_KEY =os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG:
+
+    ALLOWED_HOSTS = []
+
+    # Database
+    # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    ALLOWED_HOSTS = ['quickBillBackEnd.pythonanywhere.com']
 
 
 # Application definition
@@ -43,7 +62,7 @@ INSTALLED_LOCAL = [
     'core.users',
     'core.orders',
     'core.company',
-    
+
 ]
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
@@ -79,15 +98,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "quickBillBackend.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
@@ -137,14 +148,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # EMAIL CONFIG
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jal7823@gmail.com'
-EMAIL_HOST_PASSWORD = 'fnzpzsvevynypymd'
-EMAIL_USE_TLS = True
-
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 #user model
 AUTH_USER_MODEL = 'users.Users'
 
@@ -161,7 +169,13 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Quick Bill API',
-    'DESCRIPTION': 'The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability.',
+    'DESCRIPTION': 'The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability. If you can tester this API you can'
+                   ' use this data for login: '
+                   '<br>'
+                   '<br> '
+                   '**user:** TEST '
+                   '<br>'
+                   '**password:** TEST',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
     
