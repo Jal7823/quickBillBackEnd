@@ -1,8 +1,8 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from rest_framework import viewsets,status
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
-from core.users.permisionsUsers import is_Boss
 
+from core.users.permisionsUsers import isStaff
 from ..models import Company
 from .serializers import SerializerCompany
 
@@ -59,6 +59,7 @@ from .serializers import SerializerCompany
 class ViewsCompany(viewsets.ModelViewSet):
     queryset =Company.objects.all()
     serializer_class = SerializerCompany
+    permission_classes = [ isStaff ]
     
 
     

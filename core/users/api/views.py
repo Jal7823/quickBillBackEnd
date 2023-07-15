@@ -1,15 +1,11 @@
-import jwt
-
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.views import APIView
 from rest_framework import viewsets
-from django.contrib.auth import authenticate
+from drf_spectacular.utils import extend_schema,extend_schema_view
 
-from drf_spectacular.utils import extend_schema
-
+from ..permisionsUsers import isStaff
 from ..models import Users
 from .serializers import SerializerUser
 
@@ -26,10 +22,19 @@ class RegisterView(generics.CreateAPIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
+
+@extend_schema_view(
+    list=extend_schema(
+        responses={
+            401:'desauthorizado',
+            200:'todo bien'
+        }
+    ),
+)
 class ViewUsers(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = SerializerUser
+    permission_classes = [isStaff,]
 
 
 

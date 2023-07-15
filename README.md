@@ -1,4 +1,4 @@
-## QuickBillBackEnd 🚀
+~~## QuickBillBackEnd 🚀
 QuickBillBackEnd is the backend for the QuickBill project, an application to manage sales and invoices. It's built with Django Rest Framework and uses SimpleJWT for authentication.
 
 ### Getting Started 💻:

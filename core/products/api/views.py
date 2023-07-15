@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from ..models import Brand,Category,Products,Provider
 from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,SerializerProvider
 
-from core.users.permisionsUsers import IsEmploye,is_Boss,is_Staff
+from core.users.permisionsUsers import IsEmploye,isBoss,isStaff
 
 @extend_schema_view(
     list=extend_schema(
