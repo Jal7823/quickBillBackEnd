@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
-from rest_framework import viewsets,status
+from rest_framework import viewsets, status
+from rest_framework.response import Response
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 
 from core.users.permisionsUsers import isStaff
@@ -17,9 +18,9 @@ from .serializers import SerializerCompany
         description='Create a new instance of Company',
         request=SerializerCompany,
         responses={
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     retrieve=extend_schema(
@@ -27,8 +28,8 @@ from .serializers import SerializerCompany
         description='Retrieve a specific instance of Company by ID',
         responses={
             200: SerializerCompany,
-            404: 'Not found',
-            500: 'Internal server error',
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     update=extend_schema(
@@ -36,9 +37,9 @@ from .serializers import SerializerCompany
         description='Update a specific instance of Company by ID',
         request=SerializerCompany,
         responses={
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     partial_update=extend_schema(
@@ -46,9 +47,9 @@ from .serializers import SerializerCompany
         description='Partial update a specific instance of Company by ID',
         request=SerializerCompany,
         responses={
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     destroy=extend_schema(
@@ -57,10 +58,6 @@ from .serializers import SerializerCompany
     ),
 )
 class ViewsCompany(viewsets.ModelViewSet):
-    queryset =Company.objects.all()
+    queryset = Company.objects.all()
     serializer_class = SerializerCompany
-    permission_classes = [ isStaff ]
-    
-
-    
-
+    permission_classes = [isStaff]
