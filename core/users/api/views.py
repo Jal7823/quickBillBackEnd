@@ -9,10 +9,23 @@ from ..permisionsUsers import isStaff
 from ..models import Users
 from .serializers import SerializerUser
 
+
 class RegisterView(generics.CreateAPIView):
     queryset = Users.objects.all()
     permission_classes = [AllowAny]
     serializer_class = SerializerUser
+
+
+    @extend_schema(
+        tags=['Users'],
+        description='Create a new instance of users',
+        request=SerializerUser,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    )
 
     def post(self, request):
         serializer = SerializerUser(data=request.data)
@@ -25,10 +38,51 @@ class RegisterView(generics.CreateAPIView):
 
 @extend_schema_view(
     list=extend_schema(
+        tags=['Users'],
+        description='Should get all users'
+    ),
+    create=extend_schema(
+        tags=['Users'],
+        description='Create a new instance of users',
+        request=SerializerUser,
         responses={
-            401:'desauthorizado',
-            200:'todo bien'
-        }
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    retrieve=extend_schema(
+        tags=['Users'],
+        description='Retrieve a specific instance of MyModel by ID',
+        responses={
+            200: SerializerUser,
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    update=extend_schema(
+        tags=['Users'],
+        description='Update a specific instance of MyModel by ID',
+        request=SerializerUser,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    partial_update=extend_schema(
+        tags=['Users'],
+        description='Partial update a specific instance of MyModel by ID',
+        request=SerializerUser,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    destroy=extend_schema(
+        tags=['Users'],
+        description='Delete a specific instance of MyModel by ID',
     ),
 )
 class ViewUsers(viewsets.ModelViewSet):
