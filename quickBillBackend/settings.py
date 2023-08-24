@@ -1,10 +1,11 @@
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -12,9 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-7bqf4zndoah$s&cpnmhvc=yt*cw39*)qxjr^1jxi1*i)-_9(zi"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -75,15 +76,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "quickBillBackend.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation
@@ -126,27 +119,52 @@ USE_TZ = True
 # MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
+if DEBUG:
 
-########################### DEV ##################################
-# Configuración para archivos estáticos en desarrollo
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+    # Database
+    # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Configuración para archivos multimedia en desarrollo
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
+    ########################### DEV ##################################
+    # Configuración para archivos estáticos en desarrollo
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
 
+    # Configuración para archivos multimedia en desarrollo
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+else:
+
+    # Database
+    # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('NAMEDB'),
+            'USER': os.getenv('USERDB'),
+            'PASSWORD': os.getenv('PASSWORDDB'),
+            'HOST': os.getenv('HOSTDB'),
+            'PORT': os.getenv('PORTDB'),
+        }
+    }
 ############################ PRO #################################
-# Configuración para archivos estáticos en producción
-# STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Configuración para archivos estáticos en producción
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# # Configuración para archivos multimedia en producción
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    # Configuración para archivos multimedia en producción
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #############################################################
 
@@ -158,12 +176,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # EMAIL CONFIG
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "jal7823@gmail.com"
-EMAIL_HOST_PASSWORD = "fnzpzsvevynypymd"
-EMAIL_USE_TLS = True
+EMAIL_BACKEND =os.getenv('EMAIL_BACKEND')
+EMAIL_HOST =os.getenv('EMAIL_HOST')
+EMAIL_PORT =os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER =os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD =os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS =os.getenv('EMAIL_USE_TLS')
 
 # user model
 AUTH_USER_MODEL = "users.Users"
