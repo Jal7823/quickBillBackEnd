@@ -25,4 +25,10 @@ class SerializerProducts(serializers.ModelSerializer):
         model = Products
         fields = '__all__'
 
+    def create(self,validate_data):
+        price = validate_data.get('price')
+        newPrice = price * 1.25
+        validate_data['wPrice'] = newPrice
+        return Products.objects.create(**validate_data)
+
 

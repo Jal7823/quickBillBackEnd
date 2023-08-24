@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 
@@ -27,23 +26,20 @@ INSTALLED_BASE = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
 ]
 
 INSTALLED_THRIDS = [
-    'rest_framework',
-    'drf_spectacular',
-    'corsheaders',
-    'rest_framework_simplejwt',
-
+    "rest_framework",
+    "drf_spectacular",
+    "corsheaders",
+    "rest_framework_simplejwt",
 ]
 INSTALLED_LOCAL = [
-    'core.products',
-    'core.sales',
-    'core.users',
-    'core.orders',
-    'core.company',
-    
+    "core.products",
+    "core.sales",
+    "core.users",
+    "core.orders",
+    "core.company",
 ]
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
@@ -63,7 +59,7 @@ ROOT_URLCONF = "quickBillBackend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -124,11 +120,35 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# STATIC_URL = "/static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+
+########################### DEV ##################################
+# Configuración para archivos estáticos en desarrollo
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Configuración para archivos multimedia en desarrollo
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+############################ PRO #################################
+# Configuración para archivos estáticos en producción
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# # Configuración para archivos multimedia en producción
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#############################################################
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -138,39 +158,32 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # EMAIL CONFIG
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jal7823@gmail.com'
-EMAIL_HOST_PASSWORD = 'fnzpzsvevynypymd'
+EMAIL_HOST_USER = "jal7823@gmail.com"
+EMAIL_HOST_PASSWORD = "fnzpzsvevynypymd"
 EMAIL_USE_TLS = True
 
-#user model
-AUTH_USER_MODEL = 'users.Users'
+# user model
+AUTH_USER_MODEL = "users.Users"
 
-#API
+# API
 REST_FRAMEWORK = {
     # YOUR SETTINGS
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',    
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    
 }
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Quick Bill API',
-    'DESCRIPTION': 'The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability.',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    
-    
-    # OTHER SETTINGS
+    "TITLE": "Quick Bill API",
+    "DESCRIPTION": "The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
-
-#cors origin
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:5173'
-]
+# cors origin
+CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]

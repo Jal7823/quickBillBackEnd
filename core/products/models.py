@@ -54,7 +54,7 @@ class Products(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE,null=True,blank=True)
     category = models.ManyToManyField(Category)
     price = models.FloatField('Price')
-    wPrice = models.IntegerField("wholesaler's price")
+    wPrice = models.IntegerField("wholesaler's price",null=True,blank=True)
     image = models.ImageField('Image', upload_to='products',null=True,blank=True,default='products/defaultProduct.png')
     stock = models.IntegerField('Stock')
     created = models.DateField(auto_now_add=True, verbose_name='Created')
