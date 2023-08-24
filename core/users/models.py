@@ -9,6 +9,7 @@ class UserManager(BaseUserManager):
             username = username,
             email = self.normalize_email(email),
             name = name
+ 
         )
         user.set_password(password)
         user.save()
@@ -27,6 +28,12 @@ class UserManager(BaseUserManager):
         return 
 
 class Users(AbstractUser):
+    ROLE=(
+        ('client','client',),
+        ('boos','boos',),
+        ('employe','employe',),
+    )
+
     #data base
     username = models.CharField('Username', max_length=50,unique=True)
     name = models.CharField('Name', max_length=100,unique=True)
@@ -34,8 +41,7 @@ class Users(AbstractUser):
     image = models.ImageField('Image', upload_to='avatar',null=True,blank=True,default='avatar/default.jpg')
     #permisions
     is_staff = models.BooleanField(default=False)
-    is_employe = models.BooleanField(default=False)
-    is_boss = models.BooleanField(default=False)
+    role = models.CharField('Role',choices=ROLE, max_length=50,default='client')
     #data
     address = models.CharField('Address', max_length=250)
     location = models.CharField('Locatin', max_length=250)

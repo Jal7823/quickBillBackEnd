@@ -7,20 +7,21 @@ from drf_spectacular.utils import extend_schema,extend_schema_view
 
 from ..permisionsUsers import isStaff
 from ..models import Users
-from .serializers import SerializerUser
+from .serializers import SerializerUser,SerializerClients
 
 
 class RegisterView(generics.CreateAPIView):
     queryset = Users.objects.all()
     permission_classes = [AllowAny]
-    serializer_class = SerializerUser
+    serializer_class = SerializerClients
 
 
     @extend_schema(
-        tags=['Users'],
+        tags=['Clients'],
         description='Create a new instance of users',
-        request=SerializerUser,
+        request=SerializerClients,
         responses={
+            201: 'The client was created successfully',
             400: 'The information is missed',
             404: 'Not found',
             500: 'Internal server error',
@@ -28,7 +29,7 @@ class RegisterView(generics.CreateAPIView):
     )
 
     def post(self, request):
-        serializer = SerializerUser(data=request.data)
+        serializer = SerializerClients(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             if user:

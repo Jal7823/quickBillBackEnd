@@ -2,8 +2,6 @@
 from rest_framework import viewsets,status
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 
-
-
 from ..models import OrderItem,Orders
 from .serializers import SerializerOders,SerializerOderItem
 
