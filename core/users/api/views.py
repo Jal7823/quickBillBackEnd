@@ -89,7 +89,6 @@ class RegisterView(generics.CreateAPIView):
 class ViewUsers(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = SerializerUser
-    permission_classes = [isStaff,]
 
 
 
