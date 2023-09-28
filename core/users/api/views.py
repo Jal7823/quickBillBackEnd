@@ -3,11 +3,11 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import viewsets
-from drf_spectacular.utils import extend_schema,extend_schema_view
+from drf_spectacular.utils import extend_schema, extend_schema_view
 
 from ..permisionsUsers import isStaff
 from ..models import Users
-from .serializers import SerializerUser,SerializerClients
+from .serializers import SerializerUser, SerializerClients
 
 
 class RegisterView(generics.CreateAPIView):
@@ -15,6 +15,15 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     serializer_class = SerializerClients
 
+    def create_user(self, request):
+        serializer = SerializerClients(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            user.set_password(request.data['password'])
+            user.save()
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @extend_schema(
         tags=['Clients'],
@@ -27,14 +36,8 @@ class RegisterView(generics.CreateAPIView):
             500: 'Internal server error',
         },
     )
-
     def post(self, request):
-        serializer = SerializerClients(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return self.create_user(request)
 
 
 @extend_schema_view(
@@ -89,53 +92,6 @@ class RegisterView(generics.CreateAPIView):
 class ViewUsers(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = SerializerUser
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # @extend_schema(
 #     request=LoginSerializer,

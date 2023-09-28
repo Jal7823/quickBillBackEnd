@@ -133,13 +133,13 @@ if DEBUG:
     }
 
     ########################### DEV ##################################
-    # Configuración para archivos estáticos en desarrollo
+
     STATIC_URL = '/static/'
     STATICFILES_DIRS = [
         BASE_DIR / "static",
     ]
 
-    # Configuración para archivos multimedia en desarrollo
+
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -159,11 +159,10 @@ else:
         }
     }
 ############################ PRO #################################
-    # Configuración para archivos estáticos en producción
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-    # Configuración para archivos multimedia en producción
+
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -197,8 +196,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),  # Cambia el valor según tus necesidades
-    # ... Otras configuraciones ...
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1),
 }
 
 SPECTACULAR_SETTINGS = {
