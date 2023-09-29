@@ -23,6 +23,7 @@ class UserManager(BaseUserManager):
 
         user.is_staff = True
         user.save()
+        user.role='boos'
         return
 
 

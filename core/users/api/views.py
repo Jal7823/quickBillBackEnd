@@ -7,113 +7,134 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 
 from ..permisionsUsers import isStaff
 from ..models import Users
-from .serializers import SerializerUser, SerializerClients
-
-
-class RegisterView(generics.CreateAPIView):
-    queryset = Users.objects.all()
-    permission_classes = [AllowAny]
-    serializer_class = SerializerClients
-
-    def create_user(self, request):
-        serializer = SerializerClients(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            user.set_password(request.data['password'])
-            user.save()
-            if user:
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @extend_schema(
-        tags=['Clients'],
-        description='Create a new instance of users',
-        request=SerializerClients,
-        responses={
-            201: 'The client was created successfully',
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
-        },
-    )
-    def post(self, request):
-        return self.create_user(request)
+from .serializers import SerializerClients, SerializerEmploye
 
 
 @extend_schema_view(
     list=extend_schema(
-        tags=['Users'],
-        description='Should get all users'
+        tags=['Employee'],
+        description='Should get all Employee'
     ),
     create=extend_schema(
-        tags=['Users'],
-        description='Create a new instance of users',
-        request=SerializerUser,
+        tags=['Employee'],
+        description='Create a new instance of Employee',
+        request=SerializerEmploye,
         responses={
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     retrieve=extend_schema(
-        tags=['Users'],
-        description='Retrieve a specific instance of MyModel by ID',
+        tags=['Employee'],
+        description='Retrieve a specific instance of Employee by ID',
         responses={
-            200: SerializerUser,
-            404: 'Not found',
-            500: 'Internal server error',
+            200: SerializerEmploye,
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     update=extend_schema(
-        tags=['Users'],
-        description='Update a specific instance of MyModel by ID',
-        request=SerializerUser,
+        tags=['Employee'],
+        description='Update a specific instance of Employee by ID',
+        request=SerializerEmploye,
         responses={
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     partial_update=extend_schema(
-        tags=['Users'],
-        description='Partial update a specific instance of MyModel by ID',
-        request=SerializerUser,
+        tags=['Employee'],
+        description='Partial update a specific instance of Employee by ID',
+        request=SerializerEmploye,
         responses={
-            400: 'The information is missed',
-            404: 'Not found',
-            500: 'Internal server error',
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
         },
     ),
     destroy=extend_schema(
-        tags=['Users'],
-        description='Delete a specific instance of MyModel by ID',
+        tags=['Employee'],
+        description='Delete a specific instance of Employee by ID',
     ),
 )
-class ViewUsers(viewsets.ModelViewSet):
+class RegisterEmploye(viewsets.ModelViewSet):
     queryset = Users.objects.all()
-    serializer_class = SerializerUser
+    permission_classes = [AllowAny]
+    serializer_class = SerializerEmploye
 
-# @extend_schema(
-#     request=LoginSerializer,
-#     responses={200: SerializerUser},
-#     description='Authenticate user with credentials'
-# )
-# class LoginView(APIView):
-#     def post(self, request):
-#         serializer = LoginSerializer(data=request.data.get('credentials', {}))
-#         serializer.is_valid(raise_exception=True)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            password = request.data.get('password')
+            user = serializer.save()
+            user.set_password(password)
+            user.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#         username = serializer.validated_data['username']
-#         password = serializer.validated_data['password']
 
-#         user = authenticate(username=username, password=password)
+@extend_schema_view(
+    list=extend_schema(
+        tags=['Clients'],
+        description='Should get all Clients'
+    ),
+    create=extend_schema(
+        tags=['Clients'],
+        description='Create a new instance of Clients',
+        request=SerializerClients,
+        responses={
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
+        },
+    ),
+    retrieve=extend_schema(
+        tags=['Clients'],
+        description='Retrieve a specific instance of Clients by ID',
+        responses={
+            200: SerializerClients,
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
+        },
+    ),
+    update=extend_schema(
+        tags=['Clients'],
+        description='Update a specific instance of Clients by ID',
+        request=SerializerClients,
+        responses={
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
+        },
+    ),
+    partial_update=extend_schema(
+        tags=['Clients'],
+        description='Partial update a specific instance of Clients by ID',
+        request=SerializerClients,
+        responses={
+            400: Response({'description': 'The information is missed'}),
+            404: Response({'description': 'Not found'}),
+            500: Response({'description': 'Internal server error'}),
+        },
+    ),
+    destroy=extend_schema(
+        tags=['Clients'],
+        description='Delete a specific instance of Clients by ID',
+    ),
+)
+class RegisterClients(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = SerializerClients
 
-#         if user:
-#             payload = {
-#                 'id': user.id,
-#                 'username': user.username,
-#             }
-#             token = jwt.encode(payload, 'SECRET_KEY')
-#             return Response({'token': token})
-#         else:
-#             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            password = request.data.get('password')
+            user = serializer.save()
+            user.set_password(password)
+            user.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -8,7 +8,14 @@ class SerializerClients(serializers.ModelSerializer):
         fields = ['username', 'email', 'name', 'password']
 
 
-class SerializerUser(serializers.ModelSerializer):
+class SerializerEmploye(serializers.ModelSerializer):
+
+    def validate(self, data):
+        data['role'] = 'employe'
+        return data
+
     class Meta:
         model = Users
-        fields = '__all__'
+        fields = ['username', 'name', 'email', 'password']
+
+
