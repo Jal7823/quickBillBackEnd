@@ -24,7 +24,20 @@ class OrderItem(models.Model):
 class Orders(models.Model):
     """Model definition for Orders."""
 
+    ORDER_STATUS = (
+        ('No Iniciado','No Iniciado'),
+        ('En Preparacion','En Preparacion'),
+        ('Orden Preparada','Orden Preparada'),
+        ('Enviado','Enviado'),
+    )
+    PAYMENT_STATUS = (
+        ('No Pagado','No Pagado'),
+        ('Pago Recibido','Pago Recibido'),
+    )
+
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    order_status = models.CharField('Order Order',choices=ORDER_STATUS, max_length=50)
+    payment_status = models.CharField('Estado del pago',choices=PAYMENT_STATUS, max_length=50)
     order_date = models.DateField(auto_now_add=True)
     total_amount = models.FloatField(default=0.0)
     items = models.ManyToManyField(OrderItem)
@@ -37,7 +50,7 @@ class Orders(models.Model):
 
     def __str__(self):
         """Unicode representation of Orders."""
-        return f'Cliente: {self.user.username} - Nro. Orden {self.id}'
+        return f'Cliente: {self.user.username} - Nro. Orden {self.id} - Status de la orden {self.order_status} - Status del pago {self.payment_status}'
     
 
 
