@@ -18,4 +18,4 @@ class Sales(models.Model):
 
     def __str__(self):
         """Unicode representation of Sales."""
-        return f'Cliente: {self.user.name} - Pedido Nro. {self.id}' 
+        return f'Cliente: {self.user.name} - Pedido Nro. {self.id} '

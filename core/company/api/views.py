@@ -61,3 +61,4 @@ class ViewsCompany(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = SerializerCompany
     permission_classes = [isStaff]
+

@@ -27,6 +27,7 @@ urlpatterns = [
     path('users/',include('core.users.api.routers')),
     path('orders/',include('core.orders.api.routers')),
     path('company/',include('core.company.api.routers')),
+    path('sales/',include('core.sales.api.routers')),
 
     #token
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
