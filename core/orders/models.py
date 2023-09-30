@@ -36,8 +36,8 @@ class Orders(models.Model):
     )
 
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
-    order_status = models.CharField('Order Order',choices=ORDER_STATUS, max_length=50)
-    payment_status = models.CharField('Estado del pago',choices=PAYMENT_STATUS, max_length=50)
+    order_status = models.CharField('Order Order',choices=ORDER_STATUS, max_length=50,default='No Iniciado')
+    payment_status = models.CharField('Estado del pago',choices=PAYMENT_STATUS, max_length=50,default='No Pagado')
     order_date = models.DateField(auto_now_add=True)
     total_amount = models.FloatField(default=0.0)
     items = models.ManyToManyField(OrderItem)

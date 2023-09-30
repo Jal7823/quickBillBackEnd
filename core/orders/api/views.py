@@ -1,9 +1,9 @@
-
+from rest_framework.response import Response
 from rest_framework import viewsets,status
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 
 from ..models import OrderItem,Orders
-from .serializers import SerializerOders,SerializerOderItem
+from .serializers import SerializerOders,SerializerOderItem,SerializerCreateOders
 
 
 @extend_schema_view(
@@ -58,6 +58,16 @@ from .serializers import SerializerOders,SerializerOderItem
 class ViewOrders(viewsets.ModelViewSet):
     queryset = Orders.objects.all()
     serializer_class = SerializerOders
+
+    def create(self, request, *args, **kwargs):
+        serializer = SerializerCreateOders(data=request.data)
+        if serializer.is_valid():
+            user =  request.user
+            print(user)
+            products = serializer.save()
+            return Response(self.get_serializer(products).data,status = status.HTTP_201_CREATED)
+        return Response(serializer.errors,status = status.HTTP_400_BAD_REQUEST)
+
 
 class ViewOrderItems(viewsets.ModelViewSet):
     queryset = OrderItem.objects.all()

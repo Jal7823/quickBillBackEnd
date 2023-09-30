@@ -53,7 +53,7 @@ class Products(models.Model):
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE,null=True,blank=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE,null=True,blank=True)
     category = models.ManyToManyField(Category)
-    price = models.FloatField('Price')
+    price = models.FloatField('Price',null=True,blank=True)
     wPrice = models.IntegerField("wholesaler's price",null=True,blank=True)
     image = models.ImageField('Image', upload_to='products',null=True,blank=True,default='products/defaultProduct.png')
     stock = models.IntegerField('Stock')

@@ -1,10 +1,11 @@
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 from rest_framework import viewsets,status
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from ..models import Brand,Category,Products,Provider
-from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,SerializerProvider
+from .serializers import SerializerBrand,SerializerCategory,SerializerProducts,SerializerProvider,SerializerCreateProducts
 
 from core.users.permisionsUsers import IsEmploye,isBoss,isStaff
 
@@ -61,6 +62,19 @@ class ViewProducts(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = SerializerProducts    
     # permission_classes = [IsEmploye]
+
+    def create(self, request, *args, **kwargs):
+        serializer = SerializerCreateProducts(data=request.data)
+        if serializer.is_valid():
+            product = serializer.save()
+            return Response(self.get_serializer(product).data,status = status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+
 @extend_schema_view(
     list=extend_schema(
         tags=['Category'],

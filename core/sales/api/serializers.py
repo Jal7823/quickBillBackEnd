@@ -16,7 +16,7 @@ class SerializersCreateSales(serializers.ModelSerializer):
 
     def validate(self, value):
         data = value['products']
-        total = [i.price for i in data]
+        total = [i.price for i in data if i.price is not None]
         value['total_amount'] = sum(total)
         return value
 
