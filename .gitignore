@@ -87,6 +87,9 @@ docs/_build/
 .pybuilder/
 target/
 
+#migrations
+migrations/
+
 # Jupyter Notebook
 .ipynb_checkpoints
 

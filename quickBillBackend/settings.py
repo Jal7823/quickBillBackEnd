@@ -7,16 +7,11 @@ from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7bqf4zndoah$s&cpnmhvc=yt*cw39*)qxjr^1jxi1*i)-_9(zi"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,11 +32,10 @@ INSTALLED_THRIDS = [
     "rest_framework_simplejwt",
 ]
 INSTALLED_LOCAL = [
-    "core.products",
-    "core.sales",
-    "core.users",
-    "core.orders",
-    "core.company",
+    "apps.products",
+    "apps.sales",
+    "apps.users",
+    "apps.company",
 ]
 INSTALLED_APPS = INSTALLED_BASE + INSTALLED_LOCAL + INSTALLED_THRIDS
 
@@ -76,10 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "quickBillBackend.wsgi.application"
 
-
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -98,7 +88,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -109,7 +98,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -125,6 +113,8 @@ if DEBUG:
     # Database
     # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+    ALLOWED_HOSTS = ['*']
+
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -139,7 +129,6 @@ if DEBUG:
         BASE_DIR / "static",
     ]
 
-
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -148,20 +137,21 @@ else:
     # Database
     # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+    ALLOWED_HOSTS = ['quickbillbackend.pythonanywhere.com']
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.getenv('NAMEDB'),
             'USER': os.getenv('USERDB'),
-            'PASSWORD': os.getenv('PASSWORDDB'),
+            'PASSWORD': os.getenv('PASSWORDB'),
             'HOST': os.getenv('HOSTDB'),
             'PORT': os.getenv('PORTDB'),
         }
     }
-############################ PRO #################################
+    ############################ PRO #################################
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -173,15 +163,14 @@ else:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 # EMAIL CONFIG
 
-EMAIL_BACKEND =os.getenv('EMAIL_BACKEND')
-EMAIL_HOST =os.getenv('EMAIL_HOST')
-EMAIL_PORT =os.getenv('EMAIL_PORT')
-EMAIL_HOST_USER =os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD =os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS =os.getenv('EMAIL_USE_TLS')
+# EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+# EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_PORT = os.getenv('EMAIL_PORT')
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 
 # user model
 AUTH_USER_MODEL = "users.Users"
