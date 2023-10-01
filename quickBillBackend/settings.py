@@ -137,7 +137,7 @@ else:
     # Database
     # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-    ALLOWED_HOSTS = ['quickbillbackend.pythonanywhere.com']
+    ALLOWED_HOSTS = ['haroburges.pythonanywhere.com']
 
     DATABASES = {
         'default': {
