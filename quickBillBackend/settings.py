@@ -12,8 +12,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG')
 
-
-
 # Application definition
 
 INSTALLED_BASE = [
@@ -190,9 +188,41 @@ SIMPLE_JWT = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Quick Bill API",
-    "DESCRIPTION": "The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability.",
+    "CONTACT": {
+        "name": "Jalberth M.",
+        "email": "jal7823@gmail.com",
+        "url": "https://jalberth.pythonanywhere.com",
+    },
+    "DESCRIPTION": """
+    
+    The API provides a platform for managing product, user, and sales information for an online store. Users can perform CRUD operations (create, read, update, and delete) on the data, as well as view reports and analytics on sales performance. The API is designed to be flexible and scalable, supporting a wide range of use cases and integration scenarios. With its intuitive and robust interface, the API makes it easy to manage and optimize your online store, empowering you to drive growth and profitability.
+    
+    ⚠️ The API have implemented JWT, so you need get a token in the corresponding endpoint (token) and authenticate for complete use of this api
+    
+     You should use two users:
+     - clients
+     - employee
+    
+     Both users have a different permission access to different endpoints, that with the finally to protected the sensitive information
+ 
+     ⚠️ Since this project is for demonstration only, the queries per user will be limited to 5 per user (customer, employee).
+    
+    """
+
+    ,
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+
+    "SWAGGER_UI_SETTINGS": {
+        'docExpansion':None
+    },
+    "SECURITY_DEFINITIONS": {
+        "Bearer Token": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+        },
+    }
 }
 
 # cors origin
