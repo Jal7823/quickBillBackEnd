@@ -9,13 +9,52 @@ from ..models import Sales
 from .serializers import SerializersSales,SerializersCreateSales
 
 @extend_schema_view(
+    list=extend_schema(
+        tags=['Sales'],
+        description='Should get all products'
+    ),
     create=extend_schema(
-        description='Create a new sale',
+        tags=['Sales'],
+        description='Create a new instance of Sales',
+        request=SerializersCreateSales,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    retrieve=extend_schema(
+        tags=['Sales'],
+        description='Retrieve a specific instance of MyModel by ID',
+        responses={
+            200: SerializersSales,
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    update=extend_schema(
+        tags=['Sales'],
+        description='Update a specific instance of MyModel by ID',
         request=SerializersSales,
         responses={
-            201: SerializersSales,
-            400: 'Bad Request',
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
         },
+    ),
+    partial_update=extend_schema(
+        tags=['Sales'],
+        description='Partial update a specific instance of MyModel by ID',
+        request=SerializersSales,
+        responses={
+            400: 'The information is missed',
+            404: 'Not found',
+            500: 'Internal server error',
+        },
+    ),
+    destroy=extend_schema(
+        tags=['Sales'],
+        description='Delete a specific instance of MyModel by ID',
     ),
 )
 class ViewsSales(viewsets.ModelViewSet):

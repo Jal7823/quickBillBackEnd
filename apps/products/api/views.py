@@ -19,7 +19,7 @@ from apps.users.permisionsUsers import IsEmploye, IsBoss, IsStaff
     create=extend_schema(
         tags=['Products'],
         description='Create a new instance of Products',
-        request=SerializerProducts,
+        request=SerializerCreateProducts,
         responses={
             400: 'The information is missed',
             404: 'Not found',
