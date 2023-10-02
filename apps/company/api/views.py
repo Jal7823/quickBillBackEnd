@@ -71,3 +71,6 @@ class ViewsCompany(viewsets.ModelViewSet):
             company = serializer.save()
             company.refresh_from_db()
             return Response(self.get_serializer(company).data, status=status.HTTP_201_CREATED)
+
+    def patch   (self, request, *args, **kwargs):
+        return Response(status=status.HTTP_404_NOT_FOUND)
