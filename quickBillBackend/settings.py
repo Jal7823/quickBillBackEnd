@@ -183,7 +183,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=90),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
 }
 
 SPECTACULAR_SETTINGS = {
@@ -214,7 +214,7 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
 
     "SWAGGER_UI_SETTINGS": {
-        'docExpansion':None
+        'docExpansion': None
     },
     "SECURITY_DEFINITIONS": {
         "Bearer Token": {
@@ -222,6 +222,13 @@ SPECTACULAR_SETTINGS = {
             "name": "Authorization",
             "in": "header",
         },
+    },
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '5/month',
+    },
+    "EXTERNAL_DOCS": {
+        "description": "GitHub",
+        "url": "https://github.com/Jal7823/quickBillBackEnd",
     }
 }
 

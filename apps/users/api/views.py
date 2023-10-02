@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
-from ..permisionsUsers import IsStaff, IsEmploye
+from ..permisionsUsers import IsStaff, IsBoss
 from ..models import Users
 from .serializers import SerializerClients, SerializerEmploye
 
@@ -127,6 +127,7 @@ class RegisterEmploye(viewsets.ModelViewSet):
 class RegisterClients(viewsets.ModelViewSet):
     queryset = Users.objects.filter(role='clients')
     serializer_class = SerializerClients
+    permission_classes = [IsStaff]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
