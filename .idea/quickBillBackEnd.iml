@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/media/avatar" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.11 (quickBillBackEnd)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (quickBillBackEnd)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

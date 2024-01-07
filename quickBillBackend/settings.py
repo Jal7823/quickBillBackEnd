@@ -191,7 +191,7 @@ SPECTACULAR_SETTINGS = {
     "CONTACT": {
         "name": "Jalberth M.",
         "email": "jal7823@gmail.com",
-        "url": "https://jalberth.pythonanywhere.com",
+        "url": "https://jal7823.github.io/newPortFolio2023FrontEnd",
     },
     "DESCRIPTION": """
     
